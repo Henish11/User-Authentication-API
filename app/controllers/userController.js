@@ -1,10 +1,10 @@
-const User = require('../models/user')
+const Users = require('../models/user')
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken')
 const userController = {}
 
 userController.register = (req,res) =>{
-    const user = new User(req.body)
+    const user = new Users(req.body)
     bcryptjs.genSalt()
             .then((salt)=>{
                 bcryptjs.hash(user.password,salt)
@@ -23,7 +23,7 @@ userController.register = (req,res) =>{
 
 userController.login = (req,res) =>{
     const body = req.body
-    User.findOne({email:body.email})
+    Users.findOne({email:body.email})
         .then((user)=>{
              if(!user){
                 res.json({errors: 'invalid email or password'})
@@ -52,13 +52,12 @@ userController.account = (req,res)=>{
 }
 
 userController.getusers = (req,res)=>{
-    User.find({},(err,res)=>{
-       if(err){
-         res.json(err)
-       }else{
-         res.json(res)
-       }
-    })
+            Users.find({})
+                  .then((data)=>{
+                      res.json(data)
+                  }).catch((err)=>{
+                      res.json(err)
+            })
 }
 
 module.exports = userController

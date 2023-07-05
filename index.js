@@ -6,6 +6,7 @@ require('dotenv').config()
 const port = process.env.PORT || 8000
 const routes = require('./config/routes')
 const cors = require('cors')
+const Users = require('./app/models/user')
 
 const usersData = [
     {
@@ -77,6 +78,17 @@ app.use('/', routes)
 app.get('/',(req,res)=>{
     res.send(usersData)
 })
+
+// app.get('/users',(req,res)=>{
+//     Users.find({})
+//          .then((data)=>{
+//             res.json(data)
+//          }).catch((err)=>{
+//             res.json(err)
+//     })
+// })
+
+
 app.listen(port,()=>{
    console.log(`Server is Running on port : ${port}`);
 })  
