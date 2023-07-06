@@ -3,7 +3,10 @@ const mongoose = require('mongoose')
 
 // DataBase Conection
 const dbConnect = async () =>{
-    await mongoose.connect('mongodb+srv://henish09:henish098@cluster0.jrkurve.mongodb.net/MernStack?retryWrites=true&w=majority')
+    await mongoose.connect('mongodb+srv://henish09:henish098@cluster0.jrkurve.mongodb.net/MernStack?retryWrites=true&w=majority',{
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+    })
      .then(()=>{
          console.log('db connected');
      })

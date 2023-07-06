@@ -21,6 +21,8 @@ const userSchema = new Schema({
     },
     password : {
         type :String,
+        minlength:6,
+        maxlength:40,
         required: [true, 'Enter a password.'],
         validate: [validator.isStrongPassword, 'Password should be strong']
     }
