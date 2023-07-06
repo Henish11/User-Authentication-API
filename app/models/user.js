@@ -10,6 +10,12 @@ const userSchema = new Schema({
         minlength:6,
         maxlength:40,
         unique:true,
+        unique:true,
+        validate:{
+            message:function(){
+                return 'Please Enter Username'
+            }
+        }
     },
     email : {
         type:String,
@@ -28,7 +34,12 @@ const userSchema = new Schema({
         type :String,
         require:true,
         minlength:6,
-        maxlength:128
+        maxlength:128,
+        validate:{
+            message:function(){
+                return 'Please Enter Password'
+            }
+        }
     }
 })
 
