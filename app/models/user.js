@@ -1,45 +1,28 @@
 const mongoose = require('mongoose')
-const isEmail = require('validator/lib/isEmail')
+const validator = require('validator');
 const Schema = mongoose.Schema
 
 // Schema
 const userSchema = new Schema({
     username : {
         type:String,
-        require:true,
+        required: [true, 'Enter a username.'],
+        unique: [true, 'That username is taken.'],
         minlength:6,
         maxlength:40,
-        unique:true,
-        unique:true,
-        validate:{
-            message:function(){
-                return 'Please Enter Username'
-            }
-        }
+        lowercase: true,
+        validate: [validator.isAlphanumeric, 'Usernames may only have letters and numbers.']
     },
     email : {
         type:String,
-        require:true,
-        unique:true,
-        validate:{
-            validator:function(value){
-                return isEmail(value)
-            },
-            message:function(){
-                return 'Invalid Email Format'
-            }
-        }
+        require: [true, 'Enter an email address.'],
+        unique: [true, 'That email address is taken.'],
+        validate: [validator.isEmail, 'Enter a valid email address.']
     },
     password : {
         type :String,
-        require:true,
-        minlength:6,
-        maxlength:128,
-        validate:{
-            message:function(){
-                return 'Please Enter Password'
-            }
-        }
+        required: [true, 'Enter a password.'],
+        validate: [validator.isStrongPassword, 'Password should be strong']
     }
 })
 
