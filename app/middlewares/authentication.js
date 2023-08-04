@@ -3,7 +3,7 @@ const User = require('../models/user')
 
 const authenticateUser = (req,res,next) =>{
     
-    const token = req.header('Authentication').split(' ')[1]
+    const token = req.header('Authentication')
     let tokenData;
     try {
        tokenData = jwt.verify(token,'secretkey')

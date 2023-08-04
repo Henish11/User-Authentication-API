@@ -18,6 +18,9 @@ userController.register = (req,res) =>{
                                     res.json(err)
                                 })
                         })
+                        .catch((err)=>{
+                             console.log(err);
+                        })
             })
 }
 
@@ -39,7 +42,7 @@ userController.login = (req,res) =>{
                                 username : user.username
                              }
                              const token = jwt.sign(tokenData,'secretkey', {expiresIn:'10h'})
-                             res.json({token:`bearer ${token}`})
+                             res.json({token:token})
                            }else{
                              res.json({errors: 'invalid email or password'})
                            }
