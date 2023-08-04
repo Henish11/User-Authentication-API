@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const userController = {}
 
 userController.register = (req,res) =>{
-    const user = new Users(req.body)
+    const user = new Users(req.body)    
     bcryptjs.genSalt()
             .then((salt)=>{
                 bcryptjs.hash(user.password,salt)
